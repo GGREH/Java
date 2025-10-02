@@ -29,6 +29,7 @@ public class Main {
         System.out.println("num2 before assign: " + calculator.get_n2());
 
         calculator.assign();
+
         System.out.println("num1 after assign: " + calculator.get_n1());
         System.out.println("num2 after assign: " + calculator.get_n2());
 

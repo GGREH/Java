@@ -77,6 +77,7 @@ public class BigInt {
             num1 = num2;
             num2 = temp;
         }
+
         while (num1.length() < num2.length())
             num1 = "0" + num1;
         while (num2.length() < num1.length())
