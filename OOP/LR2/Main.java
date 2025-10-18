@@ -1,4 +1,4 @@
-package LR1;
+package OOP.LR2;
 
 import java.util.Scanner;
 
