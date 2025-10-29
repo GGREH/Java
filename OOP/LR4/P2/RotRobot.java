@@ -84,6 +84,6 @@ public class RotRobot extends Robot implements Rotatable {
     }
 
     public void location() {
-        System.out.print("ShiftRobot's position (" + x + ";" + y + ") and course " + course + " degrees \n");
+        System.out.println("ShiftRobot's position (" + x + ";" + y + ") and course " + course + " degrees");
     }
 }
