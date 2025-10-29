@@ -1,4 +1,4 @@
-package OOP.LR2;
+package LR2;
 
 public class BigInt {
     private String v;

@@ -45,8 +45,8 @@ public class Robot {
         return course;
     }
 
-    public void location() {
-        System.out.println("Robot's position (" + x + ";" + y + ") and course " + course + " degrees");
+    public String getPosition() {
+        return String.format("Position: (%d, %d), Course: %d°", x, y, course);
     }
 
     public void doSomething() {

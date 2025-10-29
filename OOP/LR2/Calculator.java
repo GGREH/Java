@@ -1,4 +1,4 @@
-package OOP.LR2;
+package LR2;
 
 public class Calculator {
     private BigInt n1;
