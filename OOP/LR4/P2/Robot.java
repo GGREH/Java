@@ -6,31 +6,15 @@ public class Robot {
     protected int course;
 
     Robot() {
-        x = 0;
-        y = 0;
-        course = 0;
+        this.x = 0;
+        this.y = 0;
+        this.course = 0;
     }
 
     Robot(int xi, int yi, int ci) {
-        x = xi;
-        y = yi;
-        course = ci;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public void setCourse(int course) {
-        if (course % 90 == 0 && course < 360 && course >= 0) {
-            this.course = course;
-        } else {
-            this.course = 0;
-        }
+        this.x = xi;
+        this.y = yi;
+        this.course = ci;
     }
 
     public int getX() {
@@ -45,11 +29,28 @@ public class Robot {
         return course;
     }
 
-    public String getPosition() {
-        return String.format("Position: (%d, %d), Course: %d°", x, y, course);
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setCourse(int course) {
+        if (course % 90 == 0 && course < 360 && course >= 0) {
+            this.course = course;
+        } else {
+            System.out.println("Invalid course value! Will be set as 0");
+            this.course = 0;
+        }
     }
 
     public void doSomething() {
-        System.out.println("Robot does something");
+        System.out.println("Robot is doing something");
+    }
+
+    public void getPosition() {
+        System.out.println("Robot is on (" + x + ", " + y + "), course: " + course);
     }
 }

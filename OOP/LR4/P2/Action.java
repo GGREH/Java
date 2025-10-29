@@ -1,36 +1,32 @@
 package P2;
 
 public class Action {
-    private ActionType action;
-    private int step_count = 0;
+    private ActionType type;
+    private int steps_count;
 
-    public Action(ActionType ai, int sci) {
-        action = ai;
-        step_count = sci;
+    public Action(ActionType type, int steps_count) {
+        this.type = type;
+        this.steps_count = steps_count;
     }
 
-    public ActionType getAction() {
-        return action;
+    public ActionType getType() {
+        return type;
     }
 
-    public int getStepCount() {
-        return step_count;
+    public int getStepsCount() {
+        return steps_count;
     }
 
-    public void setStep_count(int step_count) {
-        this.step_count = step_count;
+    public void setType(ActionType type) {
+        this.type = type;
     }
 
-    public void setAction(ActionType action) {
-        this.action = action;
-    }
-
-    public enum ActionType {
-        RotF, RotB, ShiftF, ShiftB, DoSomething
+    public void setStepsCount(int steps_count) {
+        this.steps_count = steps_count;
     }
 
     @Override
     public String toString() {
-        return "[" + action + " x" + step_count + "]";
+        return type + "(" + steps_count + ")";
     }
 }

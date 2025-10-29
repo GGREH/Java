@@ -1,122 +1,145 @@
 package P2;
 
-import java.util.List;
-import java.util.ArrayList;
+public class WalkRobot extends Robot implements Rotetable, Shiftable {
+    private Action[] actionList;
 
-public class WalkRobot extends Robot implements Rotatable, Shiftable {
     public WalkRobot() {
         super();
+        this.actionList = new Action[0];
     }
 
-    public WalkRobot(int xi, int yi, int ci) {
-        super(xi, yi, ci);
+    public WalkRobot(int x, int y, int course) {
+        super(x, y, course);
+        this.actionList = new Action[0];
     }
 
-    private List<Action> actionList = new ArrayList<>();
-    private int currentActionIndex = 0;
-    private int currentStepCount = 0;
+    public WalkRobot(int x, int y, int course, Action[] actionList) {
+        super(x, y, course);
+        this.actionList = actionList != null ? actionList : new Action[0];
+    }
+
+    public void set_actionList(Action[] actionList) {
+        this.actionList = actionList != null ? actionList : new Action[0];
+    }
+
+    public void view_actionList() {
+        System.out.println("Action List for WalkRobot:");
+        if (actionList.length == 0) {
+            System.out.println("  No actions defined");
+            return;
+        }
+
+        for (int i = 0; i < actionList.length; i++) {
+            System.out.println("  " + (i + 1) + ". " + actionList[i]);
+        }
+    }
 
     @Override
     public void doSomething() {
-        System.out.println("WalkRobot: Performing action from list.");
+        System.out.println("WalkRobot is doing its mission");
     }
 
     @Override
     public void rotateForward() {
-        course = (course + Rotatable.step_angle) % 360;
-        System.out.println("RotF (course: " + course + "°)");
+        if (course + step_angle >= 360) {
+            course = course + step_angle - 360;
+        } else {
+            course = course + step_angle;
+        }
+        System.out.println("Rotated forward to course: " + course + "°");
     }
 
     @Override
     public void rotateBackward() {
-        course = (course - Rotatable.step_angle + 360) % 360;
-        System.out.println("RotB (course: " + course + "°)");
+        if (course - step_angle < 0) {
+            course = course - step_angle + 360;
+        } else {
+            course = course - step_angle;
+        }
+        System.out.println("Rotated backward to course: " + course + "°");
     }
 
     @Override
     public void shiftForward() {
-        if (course == 0)
-            x += Shiftable.step_shift;
-        else if (course == 90)
-            y += Shiftable.step_shift;
-        else if (course == 180)
-            x -= Shiftable.step_shift;
-        else if (course == 270)
-            y -= Shiftable.step_shift;
-        System.out.println("ShiftF " + getPosition());
+        switch (course) {
+            case 0:
+                y += step_shift;
+                break;
+            case 90:
+                x += step_shift;
+                break;
+            case 180:
+                y -= step_shift;
+                break;
+            case 270:
+                x -= step_shift;
+                break;
+        }
+        System.out.println("Shifted forward to (" + x + ", " + y + ")");
     }
 
     @Override
     public void shiftBackward() {
-        if (course == 0)
-            x -= Shiftable.step_shift;
-        else if (course == 90)
-            y -= Shiftable.step_shift;
-        else if (course == 180)
-            x += Shiftable.step_shift;
-        else if (course == 270)
-            y += Shiftable.step_shift;
-        System.out.println("ShiftB " + getPosition());
+        switch (course) {
+            case 0:
+                y += step_shift;
+                break;
+            case 90:
+                x += step_shift;
+                break;
+            case 180:
+                y -= step_shift;
+                break;
+            case 270:
+                x -= step_shift;
+                break;
+        }
+        System.out.println("Shifted backward to (" + x + ", " + y + ")");
     }
 
     @Override
     public void move() {
-        if (actionList.isEmpty() || currentActionIndex >= actionList.size()) {
-            System.out.println("WalkRobot: All actions completed. Current " + getPosition());
+        System.out.println("WalkRobot starting movement sequence...");
+
+        if (actionList.length == 0) {
+            System.out.println("No actions to perform");
             return;
         }
 
-        Action currentAction = actionList.get(currentActionIndex);
+        for (int i = 0; i < actionList.length; i++) {
+            Action action = actionList[i];
+            System.out.println("Executing action " + (i + 1) + ": " + action);
 
-        if (currentStepCount >= currentAction.getStepCount()) {
-            currentActionIndex++;
-            currentStepCount = 0;
-            if (currentActionIndex < actionList.size()) {
-                move();
-                return;
-            } else {
-                System.out.println("WalkRobot: All actions completed. Current " + getPosition());
-                return;
+            for (int step = 0; step < action.getStepsCount(); step++) {
+                switch (action.getType()) {
+                    case RotF:
+                        rotateForward();
+                        break;
+                    case RotB:
+                        rotateBackward();
+                        break;
+                    case ShiftF:
+                        shiftForward();
+                        break;
+                    case ShiftB:
+                        shiftBackward();
+                        break;
+                    case DoSomth:
+                        doSomething();
+                        break;
+                }
             }
         }
 
-        System.out.print("Action " + (currentActionIndex + 1) + " of " + actionList.size() + " ("
-                + (currentStepCount + 1) + "/" + currentAction.getStepCount() + "): ");
-
-        switch (currentAction.getAction()) {
-            case RotF:
-                rotateForward();
-                break;
-            case RotB:
-                rotateBackward();
-                break;
-            case ShiftF:
-                shiftForward();
-                break;
-            case ShiftB:
-                shiftBackward();
-                break;
-            case DoSomething:
-                doSomething();
-                break;
-        }
-
-        currentStepCount++;
+        System.out.println("WalkRobot finished movement sequence");
+        getPosition();
     }
 
-    public void setActionList(List<Action> list) {
-        this.actionList = list;
-        this.currentActionIndex = 0;
-        this.currentStepCount = 0;
-        System.out.println("WalkRobot: Action list set with " + list.size() + " actions.");
-    }
-
-    public List<Action> getActionList() {
-        System.out.println("WalkRobot: Viewing action list: " + actionList);
+    public Action[] getActionList() {
         return actionList;
     }
 
-    public boolean isFinished() {
-        return currentActionIndex >= actionList.size();
+    public void setActionList(Action[] actionList) {
+        this.actionList = actionList;
     }
 }

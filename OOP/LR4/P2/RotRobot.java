@@ -1,73 +1,108 @@
 package P2;
 
-public class RotRobot extends Robot implements Rotatable {
-    private int start_angle;
-    private int end_angle;
-    protected boolean movingForward = true;
-    protected boolean isDone = false;
+public class RotRobot extends Robot implements Rotetable {
+    protected int start_angle;
+    protected int end_angle;
+    public boolean MovingToEnd = true;
 
     RotRobot() {
         start_angle = 0;
         end_angle = 0;
-        course = 0;
     }
 
-    RotRobot(int sai, int eai) {
-        start_angle = sai % 360;
-        end_angle = eai % 360;
-        course = start_angle;
-        movingForward = (start_angle <= end_angle);
+    RotRobot(int xi, int yi, int ci, int ei) {
+        super(xi, yi, ci);
+        this.start_angle = ci;
+        this.end_angle = ei;
+    }
+
+    public int getStart_angle() {
+        return start_angle;
+    }
+
+    public int getEnd_angle() {
+        return end_angle;
+    }
+
+    public void setStart_angle(int start_angle) {
+        if (start_angle % 90 == 0) {
+            this.start_angle = start_angle;
+        } else {
+            System.out.println("Invalid start_angle value! Will be set as 0");
+            this.start_angle = 0;
+        }
+    }
+
+    public void setEnd_angle(int end_angle) {
+        if (end_angle % 90 == 0) {
+            this.end_angle = end_angle;
+        } else {
+            System.out.println("Invalid end_angle value! Will be set as 0");
+            this.end_angle = 0;
+        }
     }
 
     @Override
     public void doSomething() {
-        System.out.println("RotRobot: Searching for next angle. " + getPosition());
+        System.out.println("RotRobot is doing something");
     }
 
     @Override
     public void rotateForward() {
-        course = (course + step_angle) % 360;
+        if (course + step_angle >= 360) {
+            course = course + step_angle - 360;
+        } else {
+            course = course + step_angle;
+        }
     }
 
     @Override
     public void rotateBackward() {
-        course = (course - step_angle + 360) % 360;
+        if (course - step_angle <= 0) {
+            course = course - step_angle + 360;
+        } else {
+            course = course - step_angle;
+        }
     }
 
     @Override
     public void move() {
-        if (isDone) {
-            System.out.println("RotRobot: Cycle complete. Waiting.");
-            return;
-        }
 
-        doSomething();
+        System.out.println("We start moving from the start to the end angle");
 
-        if (movingForward) {
-            if (course == end_angle) {
-                movingForward = false;
-                isDone = true;
-                System.out.println("RotRobot: Reached END_ANGLE. Reversing direction.");
-                return;
-            }
-        } else {
-            if (course == start_angle) {
-                movingForward = true;
-                System.out.println("RotRobot: Reached START_ANGLE. Cycle finished.");
-                return;
+        if (course > end_angle) {
+            while (course != end_angle) {
+                rotateBackward();
+                doSomething();
             }
         }
 
-        if (movingForward) {
-            rotateForward();
-        } else {
-            rotateBackward();
+        else if (course < end_angle) {
+            while (course != end_angle) {
+                rotateForward();
+                doSomething();
+            }
+        }
+        System.out.println("RotRobot is on the end angle");
+        getPosition();
+
+        System.out.println("We start moving from the end to the start angle");
+        MovingToEnd = false;
+
+        if (course > start_angle) {
+            while (course != start_angle) {
+                rotateBackward();
+                doSomething();
+            }
         }
 
-        System.out.println("RotRobot: New course is " + course + "°");
-    }
-
-    public boolean getIsDone() {
-        return isDone;
+        else if (course < start_angle) {
+            while (course != start_angle) {
+                rotateForward();
+                doSomething();
+            }
+        }
+        System.out.println("RotRobot is on the start angle");
+        getPosition();
     }
 }
