@@ -134,12 +134,4 @@ public class WalkRobot extends Robot implements Rotetable, Shiftable {
         System.out.println("WalkRobot finished movement sequence");
         getPosition();
     }
-
-    public Action[] getActionList() {
-        return actionList;
-    }
-
-    public void setActionList(Action[] actionList) {
-        this.actionList = actionList;
-    }
 }

@@ -18,6 +18,6 @@ public class Robot {
     }
 
     public void doSomething() {
-        System.out.println("Robot does something");
+        System.out.println("Robot is doing something");
     }
 }

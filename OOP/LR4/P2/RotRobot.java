@@ -58,7 +58,7 @@ public class RotRobot extends Robot implements Rotetable {
 
     @Override
     public void rotateBackward() {
-        if (course - step_angle <= 0) {
+        if (course - step_angle < 0) {
             course = course - step_angle + 360;
         } else {
             course = course - step_angle;
