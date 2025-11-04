@@ -3,6 +3,35 @@ package P2;
 public class WalkRobot extends Robot implements Rotetable, Shiftable {
     private Action[] actionList;
 
+    public static class MissionPlanner {
+        public static Action[] createDefaultMission() {
+            System.out.println("MissionPlanner: Creating default mission plan.");
+            Action[] actions = {
+                    new Action(ActionType.RotF, 1),
+                    new Action(ActionType.ShiftF, 3),
+                    new Action(ActionType.DoSomth, 1),
+                    new Action(ActionType.RotB, 1),
+                    new Action(ActionType.ShiftB, 2)
+            };
+            return actions;
+        }
+
+        public static Action[] createSquareMission() {
+            System.out.println("MissionPlanner: Creating square mission plan.");
+            Action[] actions = {
+                    new Action(ActionType.ShiftF, 4),
+                    new Action(ActionType.RotF, 1),
+                    new Action(ActionType.ShiftF, 4),
+                    new Action(ActionType.RotF, 1),
+                    new Action(ActionType.ShiftF, 4),
+                    new Action(ActionType.RotF, 1),
+                    new Action(ActionType.ShiftF, 4),
+                    new Action(ActionType.RotF, 1),
+            };
+            return actions;
+        }
+    }
+
     public WalkRobot() {
         super();
         this.actionList = new Action[0];
