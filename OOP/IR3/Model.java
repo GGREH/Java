@@ -1,4 +1,4 @@
-package Java.OOP.IR3;
+package IR3;
 
 public class Model {
     public double calculateArea(double length, double width) {

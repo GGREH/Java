@@ -1,4 +1,4 @@
-package Java.OOP.IR3;
+package IR3;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -11,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class HelloController {
+public class CalcController {
     @FXML
     private TextField lengthTextField;
     @FXML
@@ -50,11 +50,9 @@ public class HelloController {
         calculateButton.setOnAction(event -> calculate());
         exitButton.setOnAction(actionEvent -> Platform.exit());
 
-        // Добавляем обработчики для RadioButton
         rectangleButton.setOnAction(event -> updateShapeDisplay());
         squareButton.setOnAction(event -> updateShapeDisplay());
 
-        // Добавляем обработчики для TextField
         lengthTextField.textProperty().addListener((observable, oldValue, newValue) -> updateShapeDisplay());
         widthTextField.textProperty().addListener((observable, oldValue, newValue) -> updateShapeDisplay());
 
@@ -76,13 +74,11 @@ public class HelloController {
             double a = Double.parseDouble(lengthTextField.getText());
             double b = Double.parseDouble(widthTextField.getText());
 
-            // Фиксированный множитель для увеличения маленьких фигур
             double multiplier = 10.0;
 
             double displayWidth = a * multiplier;
             double displayHeight = b * multiplier;
 
-            // Ограничиваем максимальный размер
             double maxSize = 150.0;
             if (displayWidth > maxSize || displayHeight > maxSize) {
                 double scale = maxSize / Math.max(displayWidth, displayHeight);
@@ -90,7 +86,6 @@ public class HelloController {
                 displayHeight *= scale;
             }
 
-            // Центрируем фигуру в панели
             double centerX = (shapePane.getWidth() - displayWidth) / 2;
             double centerY = (shapePane.getHeight() - displayHeight) / 2;
 
@@ -126,12 +121,12 @@ public class HelloController {
 
                 if (areaCheckBox.isSelected()) {
                     double area = model.calculateArea(a, b);
-                    result.append("Площа S = ").append(area).append("\n");
+                    result.append("Площа S (a * b)= ").append(area).append("\n");
                 }
 
                 if (perimeterCheckBox.isSelected()) {
                     double perimeter = model.calculatePerimeter(a, b);
-                    result.append("Периметр P = ").append(perimeter).append("\n");
+                    result.append("Периметр P 2 * (a + b) = ").append(perimeter).append("\n");
                 }
 
                 if (diagonalCheckBox.isSelected()) {
@@ -141,7 +136,6 @@ public class HelloController {
 
                 resultLabel.setText(result.toString());
 
-                // Обновляем отображение фигуры после расчета
                 updateShapeDisplay();
             } else {
                 resultLabel.setText("Виберіть фігуру (Прямокутник або Квадрат)");

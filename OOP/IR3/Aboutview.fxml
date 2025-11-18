@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Java.OOP.IR3.AboutController"> 
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="IR3.AboutController"> 
     <children>
         <AnchorPane layoutX="25.0" layoutY="43.0" prefHeight="332.0" prefWidth="553.0"
                     style="-fx-border-color: #000000;">
