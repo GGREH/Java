@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        String savefilename = "C:\\Users\\TOWER\\Desktop\\JavaGit\\OOP\\LR5\\out.txt";
+        String savefilename = "C:\\Users\\SIN\\Desktop\\JavaGit\\Java\\OOP\\LR5\\out.txt";
         List<Patient> listOfPatients = new ArrayList<>();
 
         try {
@@ -49,7 +49,7 @@ public class Main {
     }
 
     static void patientAddToList(List<Patient> Patients) throws IOException {
-        try (FileReader fileReader = new FileReader("C:\\Users\\TOWER\\Desktop\\JavaGit\\OOP\\LR5\\patients.txt");
+        try (FileReader fileReader = new FileReader("C:\\Users\\SIN\\Desktop\\JavaGit\\Java\\OOP\\LR5\\patients.txt");
                 BufferedReader reader = new BufferedReader(fileReader)) {
 
             String line;

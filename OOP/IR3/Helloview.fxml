@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Java.OOP.IR3.HelloController">
+   <children>
+      <Label layoutX="41.0" layoutY="66.0" text="Довжина а:"/>
+      <Label layoutX="41.0" layoutY="97.0" text="Ширина b:"/>
+      <TextField fx:id="lengthTextField" layoutX="120.0" layoutY="62.0" promptText="Введіть значення"/>
+      <TextField fx:id="widthTextField" layoutX="120.0" layoutY="93.0" promptText="Введіть значення"/>
+
+      <RadioButton fx:id="rectangleButton" layoutX="38.0" layoutY="140.0" text="Прямокутник">
+         <toggleGroup>
+            <ToggleGroup fx:id="shapeGroup"/>
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="squareButton" layoutX="159.0" layoutY="140.0" prefHeight="18.0" prefWidth="84.0" text="Квадрат" toggleGroup="$shapeGroup"/>
+      <Label layoutX="41.0" layoutY="175.0" text="Розрахувати:"/>
+      <CheckBox fx:id="areaCheckBox" layoutX="40.0" layoutY="210.0" text="Площа S"/>
+      <CheckBox fx:id="perimeterCheckBox" layoutX="137.0" layoutY="210.0" text="Периметр P"/>
+      <CheckBox fx:id="diagonalCheckBox" layoutX="256.0" layoutY="210.0" text="Діагональ d"/>
+
+      <Button fx:id="calculateButton" layoutX="35.0" layoutY="250.0" text="Розрахувати"/>
+
+      <Label fx:id="resultLabel" layoutX="42.0" layoutY="301.0" text="Результат:"/>
+
+      <Button fx:id="aboutButton" layoutX="413.0" layoutY="345.0" text="About"/>
+      <Button fx:id="exitButton" layoutX="520.0" layoutY="345.0" text="Exit"/>
+      
+      <!-- Панель для отображения фигуры -->
+      <Pane fx:id="shapePane" layoutX="350.0" layoutY="50.0" prefWidth="200.0" prefHeight="200.0" style="-fx-border-color: gray; -fx-border-width: 1px;">
+         <Rectangle fx:id="shapeRectangle" visible="false" stroke="BLUE" strokeWidth="2.0" fill="TRANSPARENT" />
+      </Pane>
+      <Label layoutX="350.0" layoutY="30.0" text="Візуалізація:"/>
+      
+   </children>
+</AnchorPane>
